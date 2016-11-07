@@ -1,0 +1,46 @@
+<!doctype html>
+<!--
+Módulo 1. Tema 6. Ejercicio P2P opcional
+Azucena Reyes Luna
+-->
+<html>
+
+  <head>
+    <meta charset="utf­8">
+    <title>Herencia</title>
+    <!-- Tupla de valoración: estilo en linea, ID, clases, elemento -->
+    <style type="text/css">
+      .cabecera h1{         /* 0,0,1,1 */
+        font-size: 10;
+        color: red;
+      }
+      h1{                   /* 0,0,0,1 */
+        font-size: 12;
+        color: blue;
+      }
+      header h1{            /* 0,0,0,2 */
+        font-size: 14;
+        color: green;
+      }
+      .cabecera h1{         /* 0,0,1,1 */
+        font-size: 16;
+        color: yellow;
+      }
+      #caja header h1{      /* 0,1,0,2 */
+        font-size: 18;
+        color: cyan;
+      }
+      /* El estilo a aplicarse en este ejercicio,
+      es donde la tupla con mayor jerarquía contiene un ID */
+    </style>
+  </head>
+
+  <body>
+    <div id="caja">
+      <header class="cabecera">
+        <h1>Cabecera: header</h1>
+      </header>
+    </div>
+  </body>
+
+</html>

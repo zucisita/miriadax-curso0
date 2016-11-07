@@ -1,10 +1,14 @@
 body{
-  background-color: gray;
+  background-color: #ccc;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 h1{
   color: #fff;
+}
+
+h2{
+  padding-left: 150px;
 }
 
 p{
@@ -13,4 +17,23 @@ p{
 
 li{
   font-family: "Times New Roman", Georgia, Serif;
+}
+
+span {
+  overflow:auto;
+  margin:0px;
+  color:#0150c7;
+}
+
+#codigo, .esquema{
+  background-color: #fff;
+  width: 100%;
+  float: left;
+  border: 2px solid #fa0;
+  color: brown;
+}
+
+
+#codigo ol li{
+  font-family: Consolas,"courier new";
 }
