@@ -1,6 +1,12 @@
-@font-face {
-    font-family: 'fira';
-    src: url('FiraSansOT-Light.otf');
+@font-face{
+    font-family: 'Fira Sans';
+    src: url('Fira-master/eot/FiraSans-Hair.eot');
+    src: url('Fira-master/eot/FiraSans-Hair.eot') format('embedded-opentype'),
+         url('Fira-master/woff2/FiraSans-Hair.woff2') format('woff2'),
+         url('Fira-master/woff/FiraSans-Hair.woff') format('woff'),
+         url('Fira-master/ttf/FiraSans-Hair.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
 }
 
 body{
@@ -58,7 +64,7 @@ footer {
 }
 
 .fira{
-	font-family: fira;
+  font-family: 'Fira Sans';
 	font-size: 36px;
 }
 
