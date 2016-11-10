@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'fira';
+    src: url('FiraSansOT-Light.otf');
+}
+
 body{
   background-color: #eee;
   font-family: Arial, Helvetica, sans-serif;
@@ -13,6 +18,7 @@ h2, h3{
 
 p, .lista{
   font-size: 1.5em;
+  line-height: 120%;
 }
 
 li{
@@ -49,4 +55,14 @@ footer {
   display: inline-block;
   position: relative;
 
+}
+
+.fira{
+	font-family: fira;
+	font-size: 36px;
+}
+
+.roboto{
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
 }
