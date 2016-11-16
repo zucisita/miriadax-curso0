@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Entrega P2P obligatoria | Date </title>
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css">
+  </head>
+  <body>
+    <h1 id="h1"></h1>
+    <h3>Entregado por <em>Azucena Reyes</em></h3>
+    <h2 id="h2">La fecha y la hora son:</h2>
+    <div id="fecha"></div>
+    <div class="detalles">
+      <ol class="letras"><em>
+        <li>Contenido de innerHTML de elemento identificado por id="h2"</li>
+          <p id="resA"></p>
+        <li>Contenido de outerHTML de elemento identificado por id="h1"</li>
+          <p>&lt;h1 id="h1"&gt;</p>
+          <p id="resB"></p>
+          <p>&lt;/h1&gt;</p>
+        <li>Contenido de de la propiedad global: location.href</li>
+          <p id="resC"></p>
+        <li>Contenido de de la propiedad global: location</li>
+          <p id="resD"></p>
+        <li>Contenido de de las propiedades globales: screen.width y screen.heigth</li>
+          <p id="resE"></p>
+      </em></ol>
+    </div>
+    <footer>
+        Elaborado por: Azucena Reyes
+    </footer>
+      <script type="text/javascript">
+        var fecha = new Date();
+        var msj;
+
+        if      (fecha.getHours() < 7){
+          msj = "Buenas noches";
+        }
+        else if (fecha.getHours() < 12){
+          msj = "Buenos días";
+        }
+        else if (fecha.getHours() < 21){
+          msj = "Buenas tardes";
+        }
+        else {
+          msj = "Buenas noches";
+        }
+
+        document.getElementById("h1").innerHTML    = msj;
+        document.getElementById("fecha").innerHTML = fecha;
+        document.getElementById("resA").innerHTML = document.getElementById("h2").innerHTML;
+        document.getElementById("resB").innerHTML = document.getElementById("h1").outerHTML;
+        document.getElementById("resC").innerHTML = document.location.href;
+        document.getElementById("resD").innerHTML = window.location;
+        document.getElementById("resE").innerHTML = "width:" + window.screen.width + ", height:" + window.screen.height;
+       </script>
+  </body>
+</html>
