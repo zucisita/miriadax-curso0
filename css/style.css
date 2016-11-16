@@ -12,10 +12,12 @@
 body{
   background-color: #eee;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 10px;
 }
 
 h1{
   color: purple;
+  text-align: center;
 }
 
 h2, h3{
@@ -39,6 +41,18 @@ span {
   font-family: Consolas,"courier new";
 }
 
+div{
+  padding: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border: 5px solid #f6f;
+  border-radius: 10px;
+}
+
+iframe{
+  padding: 20px;
+}
+
 #codigo, .esquema{
   background-color: #fff;
   width: 100%;
@@ -54,14 +68,13 @@ span {
 
 footer {
   padding-top: 20px;
-  padding-left: 40%;
-  margin-left: -8px;
+  margin-left: 0px;
   width: 100%;
   height: 40px;
   background: #6cf;
   display: inline-block;
   position: relative;
-
+  text-align: center;
 }
 
 .fira{
@@ -72,4 +85,37 @@ footer {
 .roboto{
   font-family: 'Roboto', sans-serif;
   font-size: 28px;
+}
+
+.caja1{
+  font-style: italic;
+  text-decoration: underline;
+  color: #00a;
+  background: #fceabb;
+  background: -webkit-linear-gradient(top,  #fceabb 0%,#fccd4d 50%,#f8b500 51%,#fbdf93 100%);
+}
+
+.caja2{
+  background-color: cyan;
+}
+
+.caja3{
+  background-color: #fa0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+}
+
+#fecha{
+  text-align: center;
+  font-size: 30px;
+  color: deeppink;
+}
+
+.letras{
+  list-style-type: lower-alpha;
 }
