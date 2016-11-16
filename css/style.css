@@ -119,3 +119,12 @@ footer {
 .letras{
   list-style-type: lower-alpha;
 }
+
+input, button{
+  font-size: 30px;
+  font-family: Consolas,"courier new";
+}
+
+.calculadora{
+    text-align: center;
+}

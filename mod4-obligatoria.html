@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Entrega P2P obligatoria | Calculadora</title>
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css">
+
+    <script type="text/javascript">
+      var num, acc = 0, op = "";
+
+      function vaciar (){
+        num.value = "";
+      }
+      function inic (){
+        num = document.getElementById("num");
+      }
+
+      //operaciones unitarias
+      function cuadrado() {
+        acc = num.value;
+        num.value = acc * acc;
+      }
+      function inverso() {
+        acc = num.value;
+        num.value = 1/acc;
+      }
+      function raiz2() {
+        acc = num.value;
+        num.value = Math.sqrt(acc);
+      }
+      function parte_entera() {
+        acc = num.value;
+        if (acc>0) {
+          num.value = Math.floor(acc);
+        }
+        if (acc<0) {
+          num.value = Math.ceil(acc);
+        }
+      }
+
+      //operaciones binarias
+      function mas(){
+        acc = num.value;
+        op = "+";
+      }
+      function menos(){
+        acc = num.value;
+        op = "-";
+      }
+      function por(){
+        acc = num.value;
+        op = "*";
+      }
+      function entre(){
+        acc = num.value;
+        op = "/";
+      }
+      function xelevadoy() {
+        acc = num.value;
+        op = "xelevadoy";
+      }
+
+      //cálculo de operaciones
+      function calcular() {
+        //operaciones binarias
+        if (op === "+") {
+          num.value = (+acc + +num.value);
+        }
+        if (op === "-") {
+          num.value = (+acc - +num.value);
+        }
+        if (op == "*") {
+          num.value = (+acc * +num.value);
+        }
+        if (op == "/") {
+          num.value = (+acc / +num.value);
+        }
+        if (op == "xelevadoy") {
+          num.value = (acc**num.value);
+        }
+      }
+
+
+    </script>
+  </head>
+  <body onLoad="inic()">
+    <h1>Buenos días, bienvenido a la calculadora de Azucena Reyes</h1>
+    <div class="calculadora">
+      <p>Número:
+        <input type="text" id="num" onClick="vaciar()"><p>
+        Operaciones Unitarias
+      </p>
+      <p>
+        <button onclick="cuadrado()">x<sup>2</sup> </button>
+        <button onclick="inverso()"> 1/x </button>
+        <button onclick="raiz2()"> sqrt(x) </button>
+        <button onclick="parte_entera()"> Entero(x)</button>
+      </p>
+      <p>
+        Operaciones binarias
+      </p>
+      <p>
+        <button onClick="mas()">&nbsp;+&nbsp;</button>
+        <button onClick="menos()">&nbsp;-&nbsp;</button>
+        <button onClick="por()">&nbsp;*&nbsp;</button>
+        <button onClick="entre()">&nbsp;/&nbsp;</button>
+        <button onClick="xelevadoy()">&nbsp;x^y&nbsp;</button>
+        <button onClick="calcular()">&nbsp;=&nbsp;</button>
+      </p>
+    </div>
+    <footer>
+        Elaborado por: Azucena Reyes
+    </footer>
+  </body>
+</html>
