@@ -4,137 +4,122 @@
     <meta charset="utf-8">
     <title>Entrega P2P obligatoria | Calculadora</title>
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css">
+    <script type="text/javascript"
+            src="jquery-2.1.4.min.js">
+    </script>
 
     <script type="text/javascript">
-      var num, acc = 0, op = "";
+      var op_bin="";
 
-      function vaciar() {
-        num.value = "";
-      }
-      function inic () {
-        num = document.getElementById("num");
-      }
+      $(function() {
+        $("#numero").on("click", function(){
+          $("#numero").val("");
+        });
 
-      //operaciones unitarias
-      function cuadrado() {
-        num.value = num.value * num.value;
-      }
-      function inverso() {
-        num.value = 1/num.value;
-      }
-      function raiz2() {
-        num.value = Math.sqrt(num.value);
-      }
-      function parte_entera() {
-        if (num.value>0) {
-          num.value = Math.floor(num.value);
-        }
-        if (num.value<0) {
-          num.value = Math.ceil(num.value);
-        }
-      }
-      function dospotencian() {
-        num.value = (2**num.value);
-      }
-      function factorial() {
-        acc=1;
-        for(var i=1; i<=num.value; i++) {
-          acc *= i;
-        }
-        num.value = acc;
-      }
+        //operaciones unitarias
+        $("#cuadrado").on("click", function(){
+          var num = $("#numero");
+          num.val(num.val() * num.val());
+        });
 
-      //operaciones binarias
-      function mas(){
-        acc = num.value;
-        op = "+";
-      }
-      function menos(){
-        acc = num.value;
-        op = "-";
-      }
-      function por(){
-        acc = num.value;
-        op = "*";
-      }
-      function entre(){
-        acc = num.value;
-        op = "/";
-      }
-      function xelevadoy() {
-        acc = num.value;
-        op = "xelevadoy";
-      }
-      //Operaciones con n operandos introducidos en formato CSV
-      function sumatorio() {
-        acc = 0;
-        var lista = num.value.split(",");
-        for (var i=0; i< lista.length; i++){
-          acc=acc+parseFloat(lista[i]);
-        }
-        num.value = acc;
-      }
-      function producto() {
-        acc = 1;
-        var lista = num.value.split(",");
-        for (var i=0; i< lista.length; i++){
-          acc=acc*parseFloat(lista[i]);
-        }
-        num.value = acc;
-      }
-      //cálculo de operaciones
-      function calcular() {
+        $("#inverso").on("click", function(){
+          var num = $("#numero");
+          num.val(1/num.val());
+        });
+
+        $("#raiz2").on("click", function(){
+          var num = $("#numero");
+          num.val(Math.sqrt(num.val()));
+        });
+
+        $("#parte_entera").on("click", function(){
+          var num = $("#numero");
+          if (num.val()>0)
+            num.val(Math.floor(num.val()));
+          if (num.val()<0)
+            num.val(Math.ceil(num.val()));
+        });
+
+        $("#dospotencian").on("click", function(){
+          var num = $("#numero");
+          num.val(Math.pow(2,num.val()));
+        });
+
+        $("#factorial").on("click", function(){
+          var res=1, num=$("#numero");
+          for (var i=1; i<=num.val(); i++)
+            res *= i;
+          num.val(res);
+        });
+
         //operaciones binarias
-        if (op === "+") {
-          num.value = (+acc + +num.value);
-        }
-        if (op === "-") {
-          num.value = (+acc - +num.value);
-        }
-        if (op == "*") {
-          num.value = (+acc * +num.value);
-        }
-        if (op == "/") {
-          num.value = (+acc / +num.value);
-        }
-        if (op == "xelevadoy") {
-          num.value = (acc**num.value);
-        }
-      }
+        $(".op").on("click", function(){
+          op_bin="";
+          var op = $(this).attr("href");
+          var num = $("#numero");
+          op_bin = num.val() + op;;
+        });
+
+        $("#calcular").on("click", function(){
+          var num = $("#numero");
+          op_bin += num.val();
+          num.val(eval(op_bin));
+        });
+
+        //Operaciones con n operandos introducidos en formato CSV
+        $("#sumatorio").on("click", function(){
+          var res = 0;
+          var lista = $("#numero").val().split(",");
+          for (var i=0; i< lista.length; i++){
+            res+= +lista[i];
+          }
+          $("#numero").val(res);
+        })
+
+        $("#producto").on("click", function(){
+          var res = 1;
+          var lista = $("#numero").val().split(",");
+          for (var i=0; i< lista.length; i++){
+            res*= +lista[i];
+          }
+          $("#numero").val(res);
+        })
+
+      });
     </script>
   </head>
-  <body onLoad="inic()">
+  <body>
     <h1>Buenos días, bienvenido a la calculadora de Azucena Reyes</h1>
     <div class="calculadora">
       <p>Número:
-        <input type="text" id="num" onClick="vaciar()"><p>
+        <input type="text" id="numero"><p>
         Operaciones Unitarias
       </p>
       <p>
-        <button onclick="cuadrado()">x^2</button>
-        <button onclick="inverso()"> 1/x </button>
-        <button onclick="raiz2()"> sqrt(x) </button>
-        <button onclick="parte_entera()"> Entero(x)</button>
-        <button onclick="dospotencian()">2^n</button>
-        <button onclick="factorial()">n!</button>
+        <button id="cuadrado">x^2</button>
+        <button id="inverso"> 1/x </button>
+        <button id="raiz2"> sqrt(x) </button>
+        <button id="parte_entera"> Entero(x)</button>
+        <button id="dospotencian">2^n</button>
+        <button id="factorial">n!</button>
       </p>
       <p>
         Operaciones binarias
       </p>
       <p>
-        <button onClick="mas()">&nbsp;+&nbsp;</button>
-        <button onClick="menos()">&nbsp;-&nbsp;</button>
-        <button onClick="por()">&nbsp;*&nbsp;</button>
-        <button onClick="entre()">&nbsp;/&nbsp;</button>
-        <button onClick="xelevadoy()">&nbsp;x^y&nbsp;</button>
-        <button onClick="calcular()">&nbsp;=&nbsp;</button>
+        <button class="op" href="+">&nbsp;+&nbsp;</button>
+        <button class="op" href="-">&nbsp;-&nbsp;</button>
+        <button class="op" href="*">&nbsp;*&nbsp;</button>
+        <button class="op" href="/">&nbsp;/&nbsp;</button>
+        <button class="op" href="**">&nbsp;x^y&nbsp;</button>
+        <button id="calcular">&nbsp;=&nbsp;</button>
       </p>
       <p>
         Operaciones con n operandos introducidos en formato CSV
       </p>
       <p>
-        <button onClick="sumatorio()">sumatorio(n)</button>
-        <button onClick="producto()">producto(x)</button>
+        <button id="sumatorio">&nbsp;Σ x&nbsp;</button>
+        <button id="producto">producto(x)</button>
       </p>
     </div>
     <footer>
