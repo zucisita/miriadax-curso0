@@ -117,7 +117,7 @@
     </script>
     <style type="text/css">
       #numero, #memoria, button{ font-size: 30px; font-family: Consolas,"courier new"; }
-      #numero, #memoria { border: 2px; width: 50%; margin-left: 25%; margin-right: 25%;}
+      .caja-numero { border: 2px; width: 50%; margin-left: 25%; margin-right: 25%}
       #numero{border-style: solid; color: blue;}
       #memoria{border-style: solid; color: green;}
     </style>
@@ -150,9 +150,14 @@
       <div class="calculadora text-center">
         Número:
         <div class="row">
-          <div contenteditable="true" id="numero" class="col-md-4 col-md-offset-8">9</div>
-          Memoria:<p id="memoria">1</p>
+          <p>
+            <div contenteditable="true" id="numero" class="caja-numero">9</div>
+          </p>
+          Memoria:<div id="memoria" class="caja-numero">1</div>
         </div>
+        <p>
+          &nbsp;
+        </p>
         <button id="tom">ToM</button>
         <button id="fromm">FromM</button>
         <p>
