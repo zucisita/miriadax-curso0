@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Módulo 6 | Calculadora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/jquery-1.11.2.min.js"></script>
+  	<script src="js/bootstrap.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+
+    <script type="text/javascript">
+      var op_bin="";
+
+      $(function() {
+        $("#numero").on("click", function(){
+          $($("#numero")).text("")
+        });
+
+        $("#tom").on("click", function(){
+          $("#memoria").text($("#numero").text());
+        });
+
+        $("#fromm").on("click", function(){
+          $("#numero").text($("#memoria").text());
+        });
+
+        //operaciones unitarias
+        $("#cuadrado").on("click", function(){
+          var num = $("#numero").text();
+          $("#numero").text(num * num);
+        });
+
+        $("#inverso").on("click", function(){
+          var num = $("#numero").text();
+          $("#numero").text(1/num);
+        });
+
+        $("#raiz2").on("click", function(){
+          var num = $("#numero").text();
+          $("#numero").text(Math.sqrt(num));
+        });
+
+        $("#parte_entera").on("click", function(){
+          var num = $("#numero").text();
+          if (num>0)
+            $("#numero").text(Math.floor(num));
+          if (num<0)
+            $("#numero").text(Math.ceil(num));
+        });
+
+        $("#dospotencian").on("click", function(){
+          var num = $("#numero").text();
+          $("#numero").text(Math.pow(2,num));
+        });
+
+        $("#factorial").on("click", function(){
+          var res=1, num=$("#numero").text();
+          for (var i=1; i<=num; i++)
+            res *= i;
+          $("#numero").text(res);
+        });
+
+        //operaciones binarias
+        $(".op").on("click", function(){
+          op_bin="";
+          var op = $(this).attr("href");
+          var num = $("#numero").text();
+          op_bin = num + op;
+        });
+
+        $("#calcular").on("click", function(){
+          var num = $("#numero").text();
+          op_bin += num;
+          $("#numero").text(eval(op_bin));
+        });
+
+        //Operaciones con n operandos introducidos en formato CSV
+        $("#sumatorio").on("click", function(){
+          var res = 0;
+          var lista = $("#numero").text().split(",");
+          for (var i=0; i< lista.length; i++){
+            res+= +lista[i];
+          }
+          $("#numero").text(res);
+        });
+
+        $("#producto").on("click", function(){
+          var res = 1;
+          var lista = $("#numero").text().split(",");
+          for (var i=0; i< lista.length; i++){
+            res*= +lista[i];
+          }
+          $("#numero").text(res);
+        });
+
+      });
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $("#numero, #memoria").draggable({
+        containment: 'parent',
+        revert: true
+      });
+      $( "#numero" ).droppable({
+        drop: function( event, ui ) {
+          $(this).text($("#memoria").text());
+        }
+      });
+      $( "#memoria" ).droppable({
+        drop: function( event, ui ) {
+          $(this).text($("#numero").text());
+        }
+      });
+    });
+    </script>
+    <style type="text/css">
+      #numero, #memoria, button{ font-size: 30px; font-family: Consolas,"courier new"; }
+      #numero, #memoria { border: 2px; width: 50%; margin-left: 25%; margin-right: 25%;}
+      #numero{border-style: solid; color: blue;}
+      #memoria{border-style: solid; color: green;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#miMenu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><i class="glyphicon glyphicon-home"></i></a>
+        </div>
+        <div class="collapse navbar-collapse" id="miMenu">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="mod6-obligatoria.html">INICIO</a></li>
+            <li><a href="mod6-ejercicio_puzzle.html">PUZZLE</a></li>
+            <li><a href="mod6-mod5-obligatoria.html">CALCULADORA</a></li>
+            <li><a href="#">Opción 4</a></li>
+            <li><a href="#">Opción 5</a></li>
+          </ul>
+        </div>
+      </div>
+      </nav>
+
+      <h1 class="text-center">Buenos días, bienvenido a la calculadora de Azucena Reyes</h1>
+      <div class="calculadora text-center">
+        Número:
+        <div class="row">
+          <div contenteditable="true" id="numero" class="col-md-4 col-md-offset-8">9</div>
+          Memoria:<p id="memoria">1</p>
+        </div>
+        <button id="tom">ToM</button>
+        <button id="fromm">FromM</button>
+        <p>
+          <em> ToM: mueve el número del cajetín a la memoria -- FromM: mueve el número de la memoria al cajetín</em>
+        </p>
+        <div class="col-xs-12"><hr></div>
+        <h3>
+          Operaciones Unitarias
+        </h3>
+        <p>
+          <em>Teclee un número y presione el botón la operación a realizar</em>
+        </p>
+        <p>
+          <button id="cuadrado">x^2</button>
+          <button id="inverso"> 1/x </button>
+          <button id="raiz2"> sqrt(x) </button>
+          <button id="parte_entera"> Entero(x)</button>
+          <button id="dospotencian">2^n</button>
+          <button id="factorial">n!</button>
+        </p>
+        <div class="col-xs-12"><hr></div>
+        <h3>
+          Operaciones binarias
+        </h3>
+        <p>
+          <em>Teclee un número, presione el botón la operación a realizar y teclee el segundo número</em>
+        </p>
+        <p>
+          <button class="op" href="+">&nbsp;+&nbsp;</button>
+          <button class="op" href="-">&nbsp;-&nbsp;</button>
+          <button class="op" href="*">&nbsp;*&nbsp;</button>
+          <button class="op" href="/">&nbsp;/&nbsp;</button>
+          <button class="op" href="**">&nbsp;x^y&nbsp;</button>
+          <button id="calcular">&nbsp;=&nbsp;</button>
+        </p>
+        <div class="col-xs-12"><hr></div>
+        <h3>
+          Operaciones con n operandos introducidos en formato CSV
+        </h3>
+        <p>
+          <em>Instrucciones: Teclee una lista de números en formato CSV y presione la operación a realizar</em>
+        </p>
+        <p>
+          <button id="sumatorio">&nbsp;Σ x&nbsp;</button>
+          <button id="producto">producto(x)</button>
+        </p>
+      </div>
+      <div class="clearfix" style="padding: 10px;"> </div>
+      <div class="panel-footer text-center">Elaborado por: Azucena Reyes</div>
+      <div class="clearfix" style="padding: 10px;"> </div>
+    </div>
+  </body>
+</html>
