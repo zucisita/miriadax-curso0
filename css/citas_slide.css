@@ -82,7 +82,7 @@ nav a:hover {
 	margin-bottom:0.2em;
 }
 .editar {
-	background-color: #626262;
+	background-color: #d4d4d4;
 	padding: 0.2em;
 	text-align: right;
 	height:28px;
@@ -93,7 +93,7 @@ nav a:hover {
 	border-radius:50%;
 }
 .editar:hover > img {
-	background-color: #000000;
+	background-color: #626262;
 }
 .contenido #datos div#botones {
 	border: 1px none #000000;
@@ -122,7 +122,7 @@ div #botones ul li img:hover {
 }
 
 footer {
-	margin-top: 250px;
+	margin-top: 260px;
   padding-top: 20px;
   margin-left: 0px;
   width: 100%;
@@ -131,4 +131,9 @@ footer {
 /*  display: inline-block;
   position: relative;*/
   text-align: center;
+}
+
+.download_img {
+  width: 1em;
+  height: 1em;
 }
