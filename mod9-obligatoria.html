@@ -14,7 +14,6 @@
     $(function(){
 
       function enlazarMarcador(e){
-
        // muestra ruta entre marcas anteriores y actuales
         map.drawRoute({
           origin: [lat, lng],  // origen en coordenadas anteriores
@@ -44,6 +43,7 @@
 
         GMaps.geolocate({
           success: function(position){
+            console.log(ruta.length);
             if (ruta.length < 2){
               lat = position.coords.latitude;  // guarda coords en lat y lng
               lng = position.coords.longitude;
@@ -58,37 +58,6 @@
               ruta[0].lat = lat;
               ruta[0].lng = lng;
               localStorage.ruta = JSON.stringify(ruta);
-            }else{
-              lat = ruta[0].lat;
-              lng = ruta[0].lng;
-              map = new GMaps({  // muestra mapa centrado en coords [lat, lng]
-                el: '#map',
-                lat: lat,
-                lng: lng,
-                click: enlazarMarcador,
-                tap: enlazarMarcador
-              });
-
-              map.addMarker({ lat: lat, lng: lng});  // marcador en [lat, lng]
-              // last = ruta.length-1
-              // lat = ruta[last].lat;
-              // lng = ruta[last].lng;
-
-              for (var i=1; (i < ruta.length); i++){
-      				   // muestra ruta entre marcas anteriores y actuales
-      					map.drawRoute({
-      					  origin: [lat, lng],  // origen en coordenadas anteriores
-      					  // destino en coordenadas del click o toque actual
-      					  destination: [ruta[i].lat, ruta[i].lng],
-      					  travelMode: 'driving',
-      					  strokeColor: '#000000',
-      					  strokeOpacity: 0.6,
-      					  strokeWeight: 5
-      					});
-                lat = ruta[i].lat;   // guarda coords para marca siguiente
-                lng = ruta[i].lng;
-                map.addMarker({ lat: lat, lng: lng});  // marcador en [lat, lng]
-              }
             }
           },
           error: function(error) { alert('Geolocalización falla: '+error.message); },
@@ -96,13 +65,52 @@
         });
       };
 
-      $("#clear").on("click", function(){
-  		if (confirm("¿Está seguro de eliminar todas las rutas?")){
+      function compactar() {
+        var msg = confirm("Iniciando compactación de ruta, ¿continuar?");
+
+        lat = ruta[0].lat;
+        lng = ruta[0].lng;
+        map = new GMaps({  // muestra mapa centrado en coords [lat, lng]
+          el: '#map',
+          lat: lat,
+          lng: lng,
+          click: enlazarMarcador,
+          tap: enlazarMarcador
+        });
+        map.addMarker({ lat: lat, lng: lng});  // marcador en [lat, lng]
+         last = ruta.length-1;
+
+         // muestra ruta entre marcas anteriores y actuales
+
+        map.drawRoute({
+          origin: [lat, lng],  // origen en coordenadas anteriores
+          // destino en coordenadas del click o toque actual
+          destination: [ruta[last].lat, ruta[last].lng],
+          travelMode: 'driving',
+          strokeColor: '#000000',
+          strokeOpacity: 0.6,
+          strokeWeight: 5
+        });
+        lat= ruta[last].lat;
+        lng= ruta[last].lng;
+        map.addMarker({ lat: lat, lng: lng});  // marcador en [lat, lng]
+
+        if (msg) {
+          alert("Se ha marcado la ruta más cercana");
+          limpiar();
+
+          geolocalizar();
+      }	else {
+        alert("No se compacto la ruta");
+      }
+      };
+      $("#compactar").on("click", function(){compactar();})
+
+      function limpiar(){
   			ruta=[{lat:0.00, lng:0.00}];
   			localStorage.ruta = JSON.stringify(ruta);
   			geolocalizar();
-  		}
-  	  })
+  	  }
 
       geolocalizar();
     });
@@ -110,7 +118,7 @@
 </head>
 <body>
   <h1>Geolocalización</h1>
-  <button type="button" name="button" id="clear" value="Borrar">Limpiar</button>
+  <button type="button" name="button" id="compactar" value="compactar">Compactar</button>
 
   <div id="map"></div>
 </body>

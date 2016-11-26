@@ -30,7 +30,7 @@ h1{
   background: rgba(0,255,0,0.5); /* verde si no hay mapa */
 }
 
-#compactar{
+#compactar, #clear{
   display: inline;
   font-size: 20px;
 }
